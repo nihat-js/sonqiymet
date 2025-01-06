@@ -2,7 +2,9 @@ import React from 'react';
 import Navbar from "@/components/user/Navbar";
 import PhoneCard from "@/components/user/PhoneCard"; // Adjust the path as necessary
 import Footer from '@/components/user/Footer';
-
+import CategoryNavbar from '@/components/user/CategoryNavbar';
+import PhoneFilter from '@/components/user/PhoneFilter';
+import AuthPanel from '@/components/user/AuthPanel';
 const Home = () => {
   const phones = [
     {
@@ -23,8 +25,11 @@ const Home = () => {
   return (
     <div>
       <Navbar />
+      <CategoryNavbar />
+      <PhoneFilter/>
+      <AuthPanel/>
       <h1 className="text-center text-2xl font-bold mt-4">Available Phones</h1>
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap gap-5 justify-center">
         {phones.map((phone, index) => (
           <PhoneCard
             key={index}
