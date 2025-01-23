@@ -1,89 +1,168 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { Phone, Search, ShoppingCart, Menu, X } from 'lucide-react'
+import { useState } from 'react';
+import Link from 'next/link';
+import { Phone, Search, ShoppingCart, Menu, X, User } from 'lucide-react';
+import styled from 'styled-components';
 
-const NavItem = ({ href, children }: { href: string; children: React.ReactNode }) => (
-  <Link 
-    href={href} 
-    className="relative px-3 py-2 transition-colors duration-300 hover:text-blue-500 group"
-  >
-    {children}
-    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
-  </Link>
-)
+// Styled components
+const Nav = styled.nav`
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const NavContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+`;
+
+const Logo = styled(Link)`
+  display: flex;
+  align-items: center;
+  color: #009688;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+`;
+
+const NavLinks = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
+`;
+
+const NavLink = styled(Link)`
+  position: relative;
+  color: gray;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #009688;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background: #009688;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+`;
+
+const SearchContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #f0f0f0;
+  border-radius: 5px;
+  padding: 0.5rem;
+`;
+
+const SearchInput = styled.input`
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 0.5rem 1rem; /* Added padding for better UI */
+  width: 200px;
+`;
+
+const MobileMenuButton = styled.button`
+  display: none;
+
+  @media (max-width: 640px) {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+`;
+
+const AccountContainer = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+const AccountMenu = styled.div`
+  position: absolute;
+  right: 0;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border-radius: 5px;
+  display: ${props => (props.isOpen ? 'block' : 'none')}; // Control visibility based on prop
+`;
+
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <Link href="/" className="flex-shrink-0 flex items-center">
-              <Phone className="h-8 w-8 text-blue-500" />
-              <span className="ml-2 text-xl font-bold text-gray-800">Son Qiymet </span>
-            </Link>
-          </div>
+    <Nav>
+      <NavContainer>
+        <Logo href="/">
+          <Phone className="h-8 w-8" />
+          <span className="ml-2">Son Qiymət</span>
+        </Logo>
 
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <div className="relative rounded-full bg-gray-100 p-2 flex items-center">
-              <input
-                type="text"
-                placeholder="Search phones..."
-                className="bg-transparent border-none focus:outline-none text-sm w-48 md:w-64"
-              />
-              <Search className="h-5 w-5 text-gray-400" />
-            </div>
-          </div>
+        <NavLinks>
+          <NavLink href="/buy">Al</NavLink>
+          <NavLink href="/sell">Sat</NavLink>
+          <NavLink href="/favorites">Sevimlilər</NavLink>
+        </NavLinks>
 
-          <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
-            <NavItem href="/buy">Buy</NavItem>
-            <NavItem href="/sell">Sell</NavItem>
-            <NavItem href="/about">About</NavItem>
-            <Link href="/cart" className="text-gray-600 hover:text-blue-500 transition-colors duration-300">
-              <ShoppingCart className="h-6 w-6" />
-            </Link>
-          </div>
+        <SearchContainer>
+          <SearchInput type="text" placeholder="Telefonları axtar..." />
+          <Search className="h-5 w-5 text-gray-400" />
+        </SearchContainer>
 
-          <div className="flex items-center sm:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
-            >
-              {isMenuOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
+        <AccountContainer onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}>
+          <User className="h-6 w-6 text-gray-600" />
+          {isAccountMenuOpen && (
+            <AccountMenu>
+              <NavLink href="/login">Giriş</NavLink>
+              <NavLink href="/register">Qeydiyyat</NavLink>
+            </AccountMenu>
+          )}
+        </AccountContainer>
+
+        <MobileMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </MobileMenuButton>
+      </NavContainer>
 
       {isMenuOpen && (
         <div className="sm:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <Link href="/buy" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-50">Buy</Link>
-            <Link href="/sell" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-50">Sell</Link>
-            <Link href="/about" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-50">About</Link>
-            <Link href="/cart" className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-500 hover:bg-gray-50">Cart</Link>
-          </div>
-          <div className="px-4 py-3">
-            <div className="relative rounded-md bg-gray-100 p-2 flex items-center">
-              <input
-                type="text"
-                placeholder="Search phones..."
-                className="bg-transparent border-none focus:outline-none text-sm w-full"
-              />
-              <Search className="h-5 w-5 text-gray-400" />
-            </div>
+            <NavLink href="/buy">Al</NavLink>
+            <NavLink href="/sell">Sat</NavLink>
+            <NavLink href="/favorites">Sevimlilər</NavLink>
           </div>
         </div>
       )}
-    </nav>
-  )
+    </Nav>
+  );
 }
-
