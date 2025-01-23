@@ -18,7 +18,7 @@ const CategoryTab = ({ category, isActive, onClick }) => (
     href={category.href}
     className={`flex items-center px-4 py-2 text-sm font-medium rounded-full transition-colors duration-300 ${
       isActive
-        ? 'bg-blue-500 text-white'
+        ? 'bg-obsidian text-white'
         : 'text-gray-600 hover:bg-gray-100'
     }`}
     onClick={onClick}

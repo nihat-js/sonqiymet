@@ -2,13 +2,14 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Phone, Search, ShoppingCart, Menu, X, User } from 'lucide-react';
+import { Phone, Search, ShoppingCart, Menu, X, User, PlusCircleIcon, LogInIcon } from 'lucide-react';
 import styled from 'styled-components';
 
 // Styled components
 const Nav = styled.nav`
   background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
 `;
 
 const NavContainer = styled.div`
@@ -124,15 +125,14 @@ export default function Navbar() {
     <Nav>
       <NavContainer>
         <Logo href="/">
-          <Phone className="h-8 w-8" />
-          <span className="ml-2">Son Qiymət</span>
+          {/* <Phone className="h-6 w-6 text-obsidian" /> */}
+          {/* <span className="ml-2 text-obsidian ">Son Qiymət</span> */}
+          {/* <span className="ml-2 text-obsidian" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Son Qiymət</span> */}
+          <span className="ml-2 text-obsidian font-extrabold" style={{ fontFamily: 'Cursive, sans-serif', fontWeight: 'bold' }}>Son Qiymət</span>
+
         </Logo>
 
-        <NavLinks>
-          <NavLink href="/buy">Al</NavLink>
-          <NavLink href="/sell">Sat</NavLink>
-          <NavLink href="/favorites">Sevimlilər</NavLink>
-        </NavLinks>
+
 
         {/* <SearchContainer>
           <SearchInput type="text" placeholder="Telefonları axtar..." />
@@ -140,7 +140,19 @@ export default function Navbar() {
         </SearchContainer> */}
 
         <AccountContainer onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}>
-          <User className="h-6 w-6 text-gray-600" />
+          <NavLinks>
+            {/* <NavLink href="/buy">Al</NavLink> */}
+            <NavLink href="/sell"> <PlusCircleIcon className="h-5 w-5" /> </NavLink>
+            <NavLink href="/favorites">Sevimlilər</NavLink>
+            {/* <NavLink href="/login">  <LogInIcon className="h-5 w-5" /> Daxil ol  </NavLink> */}
+            <div className='relative flex items-center gap-2 cursor-pointer bg-[#6433C4] hover:bg-[#4b27a1] transition-all duration-500 transform hover:scale-110 rounded-xl px-2 py-2 shadow-md hover:shadow-xl'>
+              <LogInIcon className="h-6 w-6 text-white" />
+              <span className="transition-all duration-500 text-white">Daxil ol</span>
+              <div className='absolute inset-0 bg-gradient-to-r from-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-xl'></div>
+              <div className='absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full animate-ping'></div>
+            </div>
+          </NavLinks>
+          {/* <NavLink href="/register">  </NavLink> */}
           {isAccountMenuOpen && (
             <AccountMenu>
               <NavLink href="/login">Giriş</NavLink>

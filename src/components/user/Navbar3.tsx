@@ -23,7 +23,7 @@ export default function Navbar3() {
               className="w-full p-3 pl-12 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-            <button className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300">
+            <button className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-obsidian text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300">
               Axtar
             </button>
           </div>

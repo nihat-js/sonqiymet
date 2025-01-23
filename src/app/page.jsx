@@ -96,7 +96,7 @@ const Home = () => {
       condition: "Yeni",
       publishedDate: "2023-05-08",
       // imageUrl: "/placeholder.svg?height=300&width=300",
-      imageUrl : "https://images.unsplash.com/photo-1610945264803-c22b62d2a7b3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      imageUrl: "https://images.unsplash.com/photo-1610945264803-c22b62d2a7b3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
   ]
 
@@ -104,7 +104,28 @@ const Home = () => {
     <div>
       <CategoryNavbar />
       <div className="container mx-auto mt-8" style={{ maxWidth: '1200px' }}>
+
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-8 gap-4 mt-8">
+          <div className="flex items-center justify-center h-32 bg-gray-100 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <img src="https://upload.wikimedia.org/wikipedia/en/f/fa/Apple_logo_black.svg" alt="Apple" className="h-6 w-6" />
+          </div>
+          <div className="flex items-center justify-center h-32 bg-gray-100 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg" alt="Samsung" className="h-6 w-6" />
+          </div>
+          <div className="flex items-center justify-center h-32 bg-gray-100 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Xiaomi_logo.svg" alt="Xiaomi" className="h-6 w-6" />
+          </div>
+          <div className="flex items-center justify-center h-32 bg-gray-100 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Huawei_logo.svg" alt="Huawei" className="h-6 w-6" />
+          </div>
+          <div className="flex items-center justify-center h-32 bg-gray-100 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/OnePlus_Logo.svg" alt="OnePlus" className="h-6 w-6" />
+          </div>
+        </div>
         <Navbar3 />
+
+
         {/* <AuthPanel /> */}
         <h1 className="text-center text-2xl font-bold mt-4">Available Phones</h1>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
