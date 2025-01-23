@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div>
+        <div className="max-w-[950px] mx-auto">
           <Navbar />
           {/* <CategoryNavbar /> */}
           <main>

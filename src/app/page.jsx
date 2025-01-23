@@ -95,7 +95,8 @@ const Home = () => {
       price: 549,
       condition: "Yeni",
       publishedDate: "2023-05-08",
-      imageUrl: "/placeholder.svg?height=300&width=300",
+      // imageUrl: "/placeholder.svg?height=300&width=300",
+      imageUrl : "https://images.unsplash.com/photo-1610945264803-c22b62d2a7b3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
   ]
 
@@ -106,7 +107,7 @@ const Home = () => {
         <Navbar3 />
         {/* <AuthPanel /> */}
         <h1 className="text-center text-2xl font-bold mt-4">Available Phones</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {phones.map((phone, index) => (
             <PhoneCard key={index} {...phone} />
           ))}

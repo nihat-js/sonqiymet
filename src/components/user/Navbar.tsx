@@ -134,10 +134,10 @@ export default function Navbar() {
           <NavLink href="/favorites">Sevimlilər</NavLink>
         </NavLinks>
 
-        <SearchContainer>
+        {/* <SearchContainer>
           <SearchInput type="text" placeholder="Telefonları axtar..." />
           <Search className="h-5 w-5 text-gray-400" />
-        </SearchContainer>
+        </SearchContainer> */}
 
         <AccountContainer onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}>
           <User className="h-6 w-6 text-gray-600" />
