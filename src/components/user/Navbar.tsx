@@ -24,7 +24,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex-shrink-0 flex items-center">
               <Phone className="h-8 w-8 text-blue-500" />
-              <span className="ml-2 text-xl font-bold text-gray-800">TelefonTap</span>
+              <span className="ml-2 text-xl font-bold text-gray-800">Son Qiymet </span>
             </Link>
           </div>
 
