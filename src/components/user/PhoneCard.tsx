@@ -42,7 +42,7 @@ export default function PhoneCard({
 
       </div>
       <div className="flex justify-between items-center  border-gray-300 mt-10">
-        <div className="flex space-x-2 w-3/5 ">
+        <div className="flex gap-1 w-3/5 ">
           {
             [0, 1, 2, 3].map((i) => (
               <button key={i} className="bg-gray-300 w-3 h-3 text-white rounded-full hover:bg-blue-600 transition-colors duration-300">
@@ -50,14 +50,14 @@ export default function PhoneCard({
             ))
           }
         </div>
-        <div className="w-1/5 border-l-2 border-r-2 border-gray-300 pr-3 pl-2">
+        <div className="w-1/5  border-gray-300 pr-2 pl-2 hover:cursor-pointer hover:bg-gray-100 transition-colors duration-300 ">
           <Scale className="w-6 h-6 text-blue-500 cursor-pointer" />
         </div>
         <div className="w-1/5 flex justify-end">
           <Heart className="w-6 h-6 text-red-500 cursor-pointer" />
         </div>
       </div>
-      <h2 className="text-lg font-semibold mb-2">
+      <h2 className="text-lg font-semibold mt-4 text-primary mb-2">
         {brand} {name}
       </h2>
       <div className="space-y-1 text-sm">
@@ -78,22 +78,22 @@ export default function PhoneCard({
           <span>Vəziyyət: {condition}</span>
         </div>
         <div className="flex items-center">
-          <Calendar className="w-4 h-4 mr-2 text-blue-500" />
-          <span>Tarix: {publishedDate}</span>
+          {/* <Calendar className="w-4 h-4 mr-2 text-blue-500" /> */}
+          <span className="text-gray-500" > Baki {publishedDate}</span>
         </div>
       </div>
       <div className="mt-4 flex justify-between items-center">
         <span className="text-lg font-bold">{price} AZN</span>
-        <button
+        {/* <button
           onClick={() => setIsLiked(!isLiked)}
           className={`p-2 rounded-full ${isLiked ? "bg-red-500 text-white" : "bg-gray-200 text-gray-600"}`}
         >
           <Heart className="w-5 h-5" />
-        </button>
+        </button> */}
       </div>
-      <button className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300">
+      {/* <button className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300">
         Müqayisə et
-      </button>
+      </button> */}
     </div>
   )
 }
