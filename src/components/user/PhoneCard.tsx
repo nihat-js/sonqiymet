@@ -45,13 +45,13 @@ export default function PhoneCard({
         <div className="flex gap-1 w-3/5 ">
           {
             [0, 1, 2, 3].map((i) => (
-              <button key={i} className="bg-gray-300 w-3 h-3 text-white rounded-full hover:bg-blue-600 transition-colors duration-300">
+              <button key={i} className="bg-gray-300 w-3 h-3 text-white rounded-full hover:bg-obsidian transition-colors duration-300">
               </button>
             ))
           }
         </div>
         <div className="w-1/5  border-gray-300 pr-2 pl-2 hover:cursor-pointer hover:bg-gray-100 transition-colors duration-300 ">
-          <Scale className="w-6 h-6 text-blue-500 cursor-pointer" />
+          <Scale className="w-6 h-6 text-obsidian cursor-pointer" />
         </div>
         <div className="w-1/5 flex justify-end">
           <Heart className="w-6 h-6 text-red-500 cursor-pointer" />
