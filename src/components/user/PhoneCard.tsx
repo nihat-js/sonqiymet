@@ -34,7 +34,7 @@ export default function PhoneCard({
   const [activeImage, setActiveImage] = useState(0)
 
   return (
-    <div className="bg-white rounded-lg shadow-md cursor-pointer 
+    <div className="bg-white rounded-lg shadow-md hover:scale-105
     hover:shadow-lg tqeransition-shadow duration-300 "
       style={{ width: '100%', }} >
       <div className="image-wrapper relative" onMouseEnter={() => setShowImagePointers(true)}
@@ -66,7 +66,7 @@ export default function PhoneCard({
           </div>
         </div>
         <div className="absolute right-2  top-2 transform  flex items-center gap-1 text-white text-sm" >
-          <div className="flex items-center gap-1  bg-green-400 hover:bg-green-400 py-1 px-2 rounded-full  transition duration-300
+          <div className="flex items-center gap-1  bg-blue-500 hover:bg-blue-600 py-1 px-2 rounded-full  transition duration-300
             cursor-pointer
           ">
             <Battery className=" w-4 h-4" />
@@ -78,7 +78,7 @@ export default function PhoneCard({
       <div className="properties p-2">
         <div className="properties flex mt-1 justify-between items-center  border-gray-300">
           <div className="flex  w-4/5 ">
-            <span className="text-[21px]  text-obsidian font-bold   ">{price} AZN</span>
+            <span className="text-[20px]  text-mandarin font-bold   ">{price} ₼</span>
           </div>
           <div className="w-1/5 flex justify-end">
             <div className="  border-gray-300 pr-2 pl-2 hover:cursor-pointer hover:bg-gray-100 transition-colors duration-300 ">
@@ -94,8 +94,8 @@ export default function PhoneCard({
         </h2>
         <div className="text-sm leading-5">
           <div className="flex items-center gap-1 flex-wrap">
-            <span className="underline cursor-pointer " > {ram}/{storage}</span>
-            <span className="underline cursor-pointer" >{color}</span>
+            <span className="underline cursor-pointer hover:scale-95 " > {ram}/{storage}</span>
+            <span className="underline cursor-pointer hover:scale-95" >{color}</span>
           </div>
           <div className="flex items-end">
             <span className="text-gray-500" > Bakı, Dünən 23:05 </span>

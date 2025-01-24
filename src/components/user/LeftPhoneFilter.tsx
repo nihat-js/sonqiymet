@@ -18,7 +18,7 @@ const FilterContainer = styled.div`
 const SectionTitle = styled.h2`
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   color: #1a1a1a;
   position: relative;
   
@@ -49,10 +49,8 @@ const CheckboxWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 12px;
-  padding: 8px 12px;
   border-radius: 8px;
   transition: all 0.2s ease;
-  
   &:hover {
     background: #f8f9fa;
   }
@@ -184,7 +182,7 @@ const models = {
   OnePlus: ['12', '12R', 'Nord CE 3', '11', '10 Pro'],
 };
 
-export default function PhoneFilter() {
+export default function LeftPhoneFilter() {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
   const [selectedStorage, setSelectedStorage] = useState<string[]>([]);

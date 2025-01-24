@@ -5,10 +5,12 @@ import Navbar from "@/components/user/Navbar";
 import PhoneCard from "@/components/user/PhoneCard"; // Adjust the path as necessary
 import Footer from '@/components/user/Footer';
 import CategoryNavbar from '@/components/user/CategoryNavbar';
-import PhoneFilter from '@/components/user/PhoneFilter';
+import PhoneFilter from '@/components/user/LeftPhoneFilter';
 import AuthPanel from '@/components/user/AuthPanel';
-import Navbar3 from '@/components/user/Navbar3';
+import Navbar3 from '@/components/user/UpperPhoneFilter';
 import QuickLinks2 from '@/components/user/QuickLinks';
+import Link from 'next/link';
+import UpperPhoneFilter from '@/components/user/UpperPhoneFilter';
 const Home = () => {
   // Update the phones array to include additional properties
   const phones = [
@@ -130,6 +132,7 @@ const Home = () => {
 
 
   const [isWarningVisible, setIsWarningVisible] = useState(true);
+  const [filterType, setFilterType] = useState("upper")
 
   return (
     <div>
@@ -148,12 +151,12 @@ const Home = () => {
             <p className="mt-1">
               Zəhmət olmasa, öncədən ödəniş tələb edən insanlardan ehtiyatlı olun.
               Bu cür tələblərə cavab verməyin.
-              Hər zaman satıcılarla görüşdükdən sonra alış-veriş etməyə çalışın.
+              Hər zaman satıcılarla görüşdükdən sonra alış-veriş etməyə çalışın. Ətraflı məlumat üçün <Link href="/faq">FAQ</Link> bölümünə baxın.
             </p>
           </div>
         )}
 
-        <QuickLinks2/>
+        <QuickLinks2 />
 
 
         {/* <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-8">
@@ -172,15 +175,19 @@ const Home = () => {
         </div> */}
 
 
-        <Navbar3 />
+        {/* <Navbar3 /> */}
+        <UpperPhoneFilter />
 
 
         {/* <AuthPanel /> */}
 
         <div className='flex gap-2 items-start'>
-          <div className='w-[250px]'>
-            <PhoneFilter />
-          </div>
+          {
+            filterType == "left" &&
+            <div className='w-[250px]'>
+              <PhoneFilter />
+            </div>
+          }
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             {phones.map((phone, index) => (
               <PhoneCard key={index} {...phone} />

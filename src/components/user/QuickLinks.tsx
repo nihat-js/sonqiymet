@@ -5,11 +5,10 @@ import { Search, Smartphone, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
 const Nav = styled.nav`
-  background-color: #1a1a1a;
+  background-color: var(--mandarin);
   color: #ffffff;
-  // padding: 1rem 2rem;
-  margin-top : 25px;
-  margin-bottom : 25px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 `
 
 const Container = styled.div`
@@ -27,30 +26,31 @@ const Logo = styled.h1`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #00ff00;
+  color: var(--mandarin);
 `
-
 
 const QuickLinks = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-top: 1rem;
   flex-wrap: wrap;
-  // justify-content: center;
   width: 100%;
+  padding: 0.75rem 1.5rem;
 `
 
 const QuickLink = styled(Link)`
-  color: #888888;
+  color: var(--obsidian-300);
   text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.2s ease-in-out;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
   display: flex;
   align-items: center;
   gap: 0.25rem;
 
   &:hover {
-    color: #00ff00;
+    color: var(--mandarin-400);
+    transform: translateX(2px);
   }
 `
 
@@ -59,13 +59,12 @@ const PopularModels = styled.div`
   gap: 1rem;
   margin-top: 1rem;
   flex-wrap: wrap;
-  // justify-content: center;
   width: 100%;
 `
 
 const ModelButton = styled.button`
-  background-color: #2a2a2a;
-  border: 1px solid #3a3a3a;
+  background-color: var(--obsidian-800);
+  border: 1px solid var(--obsidian-700);
   border-radius: 5px;
   padding: 0.5rem 1rem;
   color: #ffffff;
@@ -74,8 +73,8 @@ const ModelButton = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: #3a3a3a;
-    border-color: #00ff00;
+    background-color: var(--obsidian-700);
+    border-color: var(--mandarin-500);
   }
 `
 
@@ -92,16 +91,19 @@ export default function QuickLinks2() {
           <QuickLink href="/category/xiaomi">
             Xiaomi <ChevronRight size={16} />
           </QuickLink>
-          {/* <QuickLink href="/all-brands">
+          <QuickLink href="/category/google">
+            Google <ChevronRight size={16} />
+          </QuickLink>
+          <QuickLink href="/category/oneplus">
+            OnePlus <ChevronRight size={16} />
+          </QuickLink>
+          <QuickLink href="/category/huawei">
+            Huawei <ChevronRight size={16} />
+          </QuickLink>
+          <QuickLink href="/all-brands">
             All Brands <ChevronRight size={16} />
-          </QuickLink> */}
+          </QuickLink>
         </QuickLinks>
-        {/* <PopularModels>
-          <ModelButton>iPhone 12</ModelButton>
-          <ModelButton>iPhone 13</ModelButton>
-          <ModelButton>Samsung A52</ModelButton>
-          <ModelButton>Xiaomi Redmi Note 10</ModelButton>
-        </PopularModels> */}
     </Nav>
   )
 }

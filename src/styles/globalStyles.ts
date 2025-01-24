@@ -19,22 +19,23 @@ export const theme = {
 export const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+  // * {
+  //   box-sizing: border-box;
+  //   margin: 0;
+  //   padding: 0;
+  // }
 
-  body {
-    font-family: ${theme.fonts.main};
-    background-color: ${theme.colors.background};
-    color: ${theme.colors.text};
-    line-height: 1.6;
-  }
+  // body {
+  //   font-family: ${theme.fonts.main};
+  //   background-color: ${theme.colors.background};
+  //   color: ${theme.colors.text};
+  //   line-height: 1.6;
+  // }
 
-  a {
-    color: ${theme.colors.primary};
-    text-decoration: none;
-  }
+  // a {
+  //   color: ${theme.colors.primary};
+  //   text-decoration: none;
+  // }
 `
+
 

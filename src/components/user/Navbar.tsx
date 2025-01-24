@@ -4,13 +4,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Phone, Search, ShoppingCart, Menu, X, User, PlusCircleIcon, LogInIcon, Smartphone } from 'lucide-react';
 import styled from 'styled-components';
+import AuthModal from '../auth/AuthModal';
 
 // Styled components
 const Nav = styled.nav`
 
   // background-color: #1a1a1a;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding-top: 10px;
+  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding : 10px 6px;
 `;
 
 const NavContainer = styled.div`
@@ -121,7 +122,8 @@ const LogoText = styled.span`
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
-  background: linear-gradient(135deg, #007bff, #00ff88);
+  // background: linear-gradient(135deg, #007bff, #00ff88);
+  background: var(--mandarin);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   position: relative;
@@ -129,7 +131,8 @@ const LogoText = styled.span`
   span {
     font-family: 'Righteous', cursive;
     color: #1a1a1a;
-    -webkit-text-fill-color: #1a1a1a;
+    // -webkit-text-fill-color: #1a1a1a;
+    -webkit-text-fill-color: var(--obsidian);
     margin-right: 4px;
   }
 
@@ -154,63 +157,73 @@ const LogoText = styled.span`
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('login');
+
+  const handleAuthClick = (mode: 'login' | 'register') => {
+    setAuthModalMode(mode);
+    setIsAuthModalOpen(true);
+    setIsAccountMenuOpen(false);
+  };
 
   return (
-    <Nav>
-      <NavContainer>
-        <div className='flex items-center gap-1'>
-          <Smartphone className="h-6 w-6 text-obsidian" />
-          <LogoText className="ml-2">
-            <span>Son</span>Qiymət
-          </LogoText>
-        </div>
-        {/* <span className="ml-2 text-obsidian" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Son Qiymət</span> */}
-
-
-
-        {/* <SearchContainer>
-          <SearchInput type="text" placeholder="Telefonları axtar..." />
-          <Search className="h-5 w-5 text-gray-400" />
-        </SearchContainer> */}
-
-        <AccountContainer onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}>
-          <NavLinks>
-            <NavLink href="/faq">FAQ</NavLink>
-            <NavLink href="/sell"> <PlusCircleIcon className="h-5 w-5" /> </NavLink>
-            <NavLink href="/favorites">Sevimlilər</NavLink>
-            {/* <NavLink href="/login">  <LogInIcon className="h-5 w-5" /> Daxil ol  </NavLink> */}
-            <div className='relative flex items-center gap-2 cursor-pointer bg-mandarin hover:bg-mandarin2 transition-all duration-500 transform hover:scale-110 rounded-xl px-2 py-2 shadow-md hover:shadow-xl'>
-              <LogInIcon className="h-6 w-6 text-white" />
-              <span className="transition-all duration-500 text-white">Daxil ol</span>
-              <div className='absolute inset-0 bg-gradient-to-r from-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-xl'></div>
-              <div className='absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full animate-ping'></div>
+    <>
+      <Nav>
+        <NavContainer>
+          <Link href="/">
+            <div className='flex items-center gap-1'>
+              <Smartphone className="h-8 w-8 text-obsidian font-extrabold" />
+              <LogoText className="ml-2">
+                <span>Son</span>Qiymət
+              </LogoText>
             </div>
-          </NavLinks>
-          {/* <NavLink href="/register">  </NavLink> */}
-          {isAccountMenuOpen && (
-            <AccountMenu>
-              <NavLink href="/login">Giriş</NavLink>
-              <NavLink href="/register">Qeydiyyat</NavLink>
-            </AccountMenu>
-          )}
-        </AccountContainer>
+          </Link>
 
-        <MobileMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </MobileMenuButton>
-      </NavContainer>
+          {/* <SearchContainer>
+            <SearchInput type="text" placeholder="Telefonları axtar..." />
+            <Search className="h-5 w-5 text-gray-400" />
+          </SearchContainer> */}
 
-      {
-        isMenuOpen && (
-          <div className="sm:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              <NavLink href="/buy">Al</NavLink>
-              <NavLink href="/sell">Sat</NavLink>
+          <AccountContainer>
+            <NavLinks>
+              <NavLink href="/faq">FAQ</NavLink>
+              <NavLink href="/sell"> <PlusCircleIcon className="h-5 w-5" /> </NavLink>
               <NavLink href="/favorites">Sevimlilər</NavLink>
+              <div 
+                className='relative flex items-center gap-2 cursor-pointer bg-mandarin hover:bg-mandarin2 transition-all duration-500 transform hover:scale-110 rounded-xl px-2 py-2 shadow-md hover:shadow-xl'
+                onClick={() => handleAuthClick('login')}
+              >
+                <LogInIcon className="h-6 w-6 text-white" />
+                <span className="transition-all duration-500 text-white">Daxil ol</span>
+                <div className='absolute inset-0 bg-gradient-to-r from-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-xl'></div>
+                <div className='absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full animate-ping'></div>
+              </div>
+            </NavLinks>
+          </AccountContainer>
+
+          <MobileMenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </MobileMenuButton>
+        </NavContainer>
+
+        {
+          isMenuOpen && (
+            <div className="sm:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <NavLink href="/buy">Al</NavLink>
+                <NavLink href="/sell">Sat</NavLink>
+                <NavLink href="/favorites">Sevimlilər</NavLink>
+              </div>
             </div>
-          </div>
-        )
-      }
-    </Nav >
+          )
+        }
+      </Nav>
+
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        initialMode={authModalMode}
+      />
+    </>
   );
 }

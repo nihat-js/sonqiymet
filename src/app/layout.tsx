@@ -31,8 +31,18 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet"></link>
       </head>
       <Providers>
-        <body className="" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>
-          <div className="max-w-[1000px] mx-auto ">
+        <body className="relative" style={{ 
+          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+          // background : "black"
+          backgroundColor : "#f3f4f5"
+        }}>
+          <div className="absolute inset-0" style={{
+            // backgroundColor: '#F8F4F2',
+            opacity: 0.1,
+            // backgroundImage: 'repeating-radial-gradient(circle at 0 0, transparent 0, #e5e5f7 23px), repeating-linear-gradient(#EF790055, #EF7900)',
+            // zIndex: -1,
+          }}></div>
+          <div className="max-w-[1000px] mx-auto">
             <Navbar />
             {/* <CategoryNavbar /> */}
             <main>
@@ -42,6 +52,6 @@ export default function RootLayout({
           </div>
         </body>
       </Providers>
-    </html >
+    </html>
   );
 }
