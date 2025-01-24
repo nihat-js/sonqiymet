@@ -177,8 +177,8 @@ const Home = () => {
 
         {/* <AuthPanel /> */}
 
-        <div className='flex gap-2'>
-          <div className='w-[200px]'>
+        <div className='flex gap-2 items-start'>
+          <div className='w-[250px]'>
             <PhoneFilter />
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">

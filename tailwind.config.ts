@@ -12,8 +12,10 @@ export default {
 			colors: {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				obsidian: '#02ef03',
-				dark : "#1a1a1a",
+				obsidian: '#5A33AB',
+				dark : "var(--dark)",
+				mandarin : "var(--mandarin)",
+				mandarin2 : "var(--mandarin2)",
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'

@@ -27,9 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet"></link>
+      </head>
       <Providers>
-        <body className="bg-dark">
-          <div className="max-w-[950px] mx-auto ">
+        <body className="" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>
+          <div className="max-w-[1000px] mx-auto ">
             <Navbar />
             {/* <CategoryNavbar /> */}
             <main>

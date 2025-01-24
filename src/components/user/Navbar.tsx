@@ -8,7 +8,7 @@ import styled from 'styled-components';
 // Styled components
 const Nav = styled.nav`
 
-  background-color: #1a1a1a;
+  // background-color: #1a1a1a;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding-top: 10px;
 `;
@@ -50,7 +50,7 @@ const NavLink = styled(Link)`
   transition: color 0.3s;
 
   &:hover {
-    color: #009688;
+    color: var(--mandarin);
   }
 
   &::after {
@@ -60,7 +60,7 @@ const NavLink = styled(Link)`
     bottom: -5px;
     width: 100%;
     height: 2px;
-    background: #009688;
+    background: var(--mandarin);
     transform: scaleX(0);
     transition: transform 0.3s ease;
   }
@@ -117,6 +117,39 @@ const AccountMenu = styled.div`
   display: ${props => (props.isOpen ? 'block' : 'none')}; // Control visibility based on prop
 `;
 
+const LogoText = styled.span`
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #007bff, #00ff88);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  
+  span {
+    font-family: 'Righteous', cursive;
+    color: #1a1a1a;
+    -webkit-text-fill-color: #1a1a1a;
+    margin-right: 4px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(135deg, #007bff, #00ff88);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+`;
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -127,7 +160,9 @@ export default function Navbar() {
       <NavContainer>
         <div className='flex items-center gap-1'>
           <Smartphone className="h-6 w-6 text-obsidian" />
-          <span className="ml-2 text-obsidian ">Son Qiymət</span>
+          <LogoText className="ml-2">
+            <span>Son</span>Qiymət
+          </LogoText>
         </div>
         {/* <span className="ml-2 text-obsidian" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Son Qiymət</span> */}
 
@@ -144,7 +179,7 @@ export default function Navbar() {
             <NavLink href="/sell"> <PlusCircleIcon className="h-5 w-5" /> </NavLink>
             <NavLink href="/favorites">Sevimlilər</NavLink>
             {/* <NavLink href="/login">  <LogInIcon className="h-5 w-5" /> Daxil ol  </NavLink> */}
-            <div className='relative flex items-center gap-2 cursor-pointer bg-[#6433C4] hover:bg-[#4b27a1] transition-all duration-500 transform hover:scale-110 rounded-xl px-2 py-2 shadow-md hover:shadow-xl'>
+            <div className='relative flex items-center gap-2 cursor-pointer bg-mandarin hover:bg-mandarin2 transition-all duration-500 transform hover:scale-110 rounded-xl px-2 py-2 shadow-md hover:shadow-xl'>
               <LogInIcon className="h-6 w-6 text-white" />
               <span className="transition-all duration-500 text-white">Daxil ol</span>
               <div className='absolute inset-0 bg-gradient-to-r from-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-xl'></div>
