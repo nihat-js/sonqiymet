@@ -105,6 +105,15 @@ const Home = () => {
       <CategoryNavbar />
       <div className="container mx-auto mt-8" style={{ maxWidth: '1200px' }}>
 
+        <div className="warning-for-upfront bg-yellow-200 border-l-4 border-yellow-600 text-yellow-800 p-4 my-4 rounded-lg shadow-md">
+          <h2 className="font-bold text-lg">Diqqət!</h2>
+          <p className="mt-1">
+            Zəhmət olmasa, öncədən ödəniş tələb edən insanlardan ehtiyatlı olun.
+            Bu cür tələblərə cavab verməyin.
+            Hər zaman satıcılarla görüşdükdən sonra alış-veriş etməyə çalışın.
+          </p>
+        </div>
+
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-8 gap-4 mt-8">
           <div className="flex items-center justify-center h-32 bg-gray-100 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
