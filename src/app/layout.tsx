@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/user/Navbar";
 import Footer from "@/components/user/Footer";
+import { Providers } from "@/providers/providers";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -15,7 +16,7 @@ import Footer from "@/components/user/Footer";
 // });
 
 export const metadata: Metadata = {
-  title: "Son Qiymət",  
+  title: "Son Qiymət",
   description: "Son Qiymət - Aktiv Telefon satışı platforması",
 };
 
@@ -26,16 +27,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <div className="max-w-[950px] mx-auto">
-          <Navbar />
-          {/* <CategoryNavbar /> */}
-          <main>
-            {children}
-          </main>
-          <Footer />
-        </div>
-      </body>
+      <Providers>
+        <body className="bg-dark">
+          <div className="max-w-[950px] mx-auto ">
+            <Navbar />
+            {/* <CategoryNavbar /> */}
+            <main>
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </body>
+      </Providers>
     </html >
   );
 }

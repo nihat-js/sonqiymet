@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Search } from "lucide-react";
+import styled from "styled-components";
 
 export default function Navbar3() {
   const [search, setSearch] = useState("");
@@ -10,11 +11,46 @@ export default function Navbar3() {
   const [color, setColor] = useState("");
   const [condition, setCondition] = useState("");
 
+
+  const SearchContainer = styled.div`
+display: flex;
+align-items: center;
+background-color: #2a2a2a;
+border-radius: 5px;
+padding: 0.5rem 1rem;
+flex-grow: 1;
+margin: 1rem 0;
+border: 1px solid #3a3a3a;
+transition: border-color 0.3s ease;
+
+&:focus-within {
+  border-color: #00ff00;
+}
+`
+
+  const SearchInput = styled.input`
+border: none;
+background-color: transparent;
+margin-left: 0.5rem;
+flex-grow: 1;
+font-size: 1rem;
+color: #ffffff;
+width : 400px;
+
+&::placeholder {
+  color: #888888;
+}
+
+&:focus {
+  outline: none;
+}
+`
+
   return (
-    <div className="bg-white p-4 shadow-md">
+    <div className="p-2 shadow-md">
       <div className="container mx-auto">
-        <div className="w-4/5 m-auto my-5">
-          <div className="relative">
+        <div className="my-5 flex items-center">
+          {/* <div className="relative">
             <input
               type="text"
               placeholder="iPhone 12 256GB Zavod ..."
@@ -26,9 +62,13 @@ export default function Navbar3() {
             <button className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-obsidian text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors duration-300">
               Axtar
             </button>
-          </div>
+          </div> */}
+          <SearchContainer className="flex items-center">
+            <Search size={20} color="#888888" />
+            <SearchInput type="text" placeholder="Search for second-hand phones..." />
+          </SearchContainer>
         </div>
-        <div className="flex flex-wrap  justify-between items-center gap-4">
+        {/* <div className="flex flex-wrap  justify-between items-center gap-4">
           <Select
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
@@ -59,7 +99,7 @@ export default function Navbar3() {
             options={["Yeni", "Əla", "Yaxşı", "Orta"]}
             label="Vəziyyət"
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

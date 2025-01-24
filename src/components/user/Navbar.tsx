@@ -2,12 +2,13 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Phone, Search, ShoppingCart, Menu, X, User, PlusCircleIcon, LogInIcon } from 'lucide-react';
+import { Phone, Search, ShoppingCart, Menu, X, User, PlusCircleIcon, LogInIcon, Smartphone } from 'lucide-react';
 import styled from 'styled-components';
 
 // Styled components
 const Nav = styled.nav`
-  background-color: white;
+
+  background-color: #1a1a1a;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding-top: 10px;
 `;
@@ -124,13 +125,11 @@ export default function Navbar() {
   return (
     <Nav>
       <NavContainer>
-        <Logo href="/">
-          {/* <Phone className="h-6 w-6 text-obsidian" /> */}
-          {/* <span className="ml-2 text-obsidian ">Son Qiymət</span> */}
-          {/* <span className="ml-2 text-obsidian" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Son Qiymət</span> */}
-          <span className="ml-2 text-obsidian font-extrabold" style={{ fontFamily: 'Cursive, sans-serif', fontWeight: 'bold' }}>Son Qiymət</span>
-
-        </Logo>
+        <div className='flex items-center gap-1'>
+          <Smartphone className="h-6 w-6 text-obsidian" />
+          <span className="ml-2 text-obsidian ">Son Qiymət</span>
+        </div>
+        {/* <span className="ml-2 text-obsidian" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>Son Qiymət</span> */}
 
 
 
@@ -141,7 +140,7 @@ export default function Navbar() {
 
         <AccountContainer onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}>
           <NavLinks>
-            {/* <NavLink href="/buy">Al</NavLink> */}
+            <NavLink href="/faq">FAQ</NavLink>
             <NavLink href="/sell"> <PlusCircleIcon className="h-5 w-5" /> </NavLink>
             <NavLink href="/favorites">Sevimlilər</NavLink>
             {/* <NavLink href="/login">  <LogInIcon className="h-5 w-5" /> Daxil ol  </NavLink> */}
@@ -166,15 +165,17 @@ export default function Navbar() {
         </MobileMenuButton>
       </NavContainer>
 
-      {isMenuOpen && (
-        <div className="sm:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <NavLink href="/buy">Al</NavLink>
-            <NavLink href="/sell">Sat</NavLink>
-            <NavLink href="/favorites">Sevimlilər</NavLink>
+      {
+        isMenuOpen && (
+          <div className="sm:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              <NavLink href="/buy">Al</NavLink>
+              <NavLink href="/sell">Sat</NavLink>
+              <NavLink href="/favorites">Sevimlilər</NavLink>
+            </div>
           </div>
-        </div>
-      )}
-    </Nav>
+        )
+      }
+    </Nav >
   );
 }
