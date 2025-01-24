@@ -51,8 +51,9 @@ export default function PhoneCard({
               [0, 1, 2, 3].map((i) => (
                 <div className=""
                   onMouseEnter={() => setActiveImage(i)}
+                  key={i}
                 >
-                  <button key={i} className={`bg-gray-300 w-3 h-2  text-white rounded-full
+                  <button className={`bg-gray-300 w-3 h-2  text-white rounded-full
                  hover:bg-obsidian transition-colors duration-300
                  
                 ${showImagePointers ? 'opacity-100' : 'opacity-0'}
@@ -78,7 +79,7 @@ export default function PhoneCard({
       <div className="properties p-2">
         <div className="properties flex mt-1 justify-between items-center  border-gray-300">
           <div className="flex  w-4/5 ">
-            <span className="text-[20px]  text-mandarin font-bold   ">{price} ₼</span>
+            <span className="text-[20px]  text-obsidian font-bold   ">{price} ₼</span>
           </div>
           <div className="w-1/5 flex justify-end">
             <div className="  border-gray-300 pr-2 pl-2 hover:cursor-pointer hover:bg-gray-100 transition-colors duration-300 ">
