@@ -82,11 +82,11 @@ export default function PhoneCard({
             <span className="text-[20px]  text-obsidian font-bold   ">{price} ₼</span>
           </div>
           <div className="w-1/5 flex justify-end">
-            <div className="  border-gray-300 pr-2 pl-2 hover:cursor-pointer hover:bg-gray-100 transition-colors duration-300 ">
-              <Scale className="w-5 h-5 text-black-500 cursor-pointer" />
+            <div className="  border-gray-300 p-1  hover:cursor-pointer hover:bg-gray-300 transition-colors duration-300 ">
+              <Scale className="w-4 h-4 text-black-500 cursor-pointer" />
             </div>
-            <div className="  border-gray-300 pr-2 pl-2 hover:cursor-pointer hover:bg-gray-100 transition-colors duration-300 ">
-              <Heart className="w-5 h-5 text-black-500 cursor-pointer" />
+            <div className="  border-gray-300 p-1 hover:cursor-pointer hover:bg-red-500 transition-colors duration-300 ">
+              <Heart className="w-4 h-4 text-black-500 cursor-pointer" />
             </div>
           </div>
         </div>

@@ -136,7 +136,7 @@ const Home = () => {
 
   return (
     <div>
-      <CategoryNavbar />
+      {/* <CategoryNavbar /> */}
       <div className="container mx-auto mt-8">
 
         {isWarningVisible && (
@@ -185,7 +185,7 @@ const Home = () => {
           {
             filterType == "left" &&
             <div className='w-[250px]'>
-              <PhoneFilter />
+              {/* <PhoneFilter /> */}
             </div>
           }
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
