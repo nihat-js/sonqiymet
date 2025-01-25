@@ -12,7 +12,7 @@ export default {
 			colors: {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-				obsidian: '#5A33AB',
+				obsidian: 'var(--obsidian)',
 				dark : "var(--dark)",
 				mandarin : "var(--mandarin)",
 				mandarin2 : "var(--mandarin2)",

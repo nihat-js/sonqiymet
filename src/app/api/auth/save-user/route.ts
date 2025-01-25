@@ -1,12 +1,12 @@
 // app/api/save-user/route.js
-import admin from '@/src/lib/firebaseAdmin';
-import User from '@/src/database/sequelize/models/User';
-import { NextResponse } from 'next/server';
-import { config } from '@/src/lib/config';
+import admin from '@/lib/firbaseAdmin';
+import { NextRequest, NextResponse } from 'next/server';
+import { appConfig } from '@/lib/appConfig';
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
+import { prisma } from '@/lib/prisma';
 
-export async function POST(req) {
+export async function POST(req: NextRequest) {
     const { idToken } = await req.json(); // Use req.json() to parse the request body
     let provider = "google"
     let decodedUser
@@ -16,15 +16,17 @@ export async function POST(req) {
         if (!decodedUser) {
             return NextResponse.json({ error: 'Invalid token' });
         }
-        let user = await User.findOne({ where: { email: decodedUser.email } });
+        let user = await prisma.user.findFirst({ where: { email: decodedUser.email } });
 
 
 
         if (!user) {
-            user = await User.create({
-                name: decodedUser.name,
-                email: decodedUser.email,
-                provider: provider
+            user = await prisma.user.create({
+                data: {
+                    name: decodedUser.name,
+                    email: decodedUser.email,
+                    // provider: provider
+                }
             });
         }
         let data = {
@@ -36,13 +38,13 @@ export async function POST(req) {
 
         console.log(data)
 
-        let jwtToken = jwt.sign(data, config.JWTSecret, { expiresIn: '14days' });
+        let jwtToken = jwt.sign(data, appConfig.JWT_SECRET, { expiresIn: '14days' });
         let cookiesStore = await cookies()
         cookiesStore.set('token', jwtToken, { httpOnly: true, secure: true, maxAge: 14 * 24 * 60 * 60 * 1000 });
-        return NextResponse.json({ error: false, message: 'User data saved successfully', data: data });    
+        return NextResponse.json({ error: false, message: 'User data saved successfully', data: data });
 
 
-    } catch (error) {
+    } catch (error : any) {
         return NextResponse.json({ error: error.message });
     }
 }

@@ -1,7 +1,6 @@
 "use client"
 
 import styled from "styled-components"
-import Layout from "../../components/Layout"
 import { useParams } from "next/navigation"
 import { useState } from "react"
 import { Phone, User, MapPin, DollarSign } from "lucide-react"

@@ -1,7 +1,6 @@
 "use client"
 
 import styled from "styled-components"
-import Layout from "../components/Layout"
 
 const Title = styled.h1`
   font-size: 2rem;

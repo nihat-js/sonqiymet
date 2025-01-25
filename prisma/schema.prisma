@@ -17,8 +17,219 @@ model User {
   id       Int     @id @default(autoincrement())
   name     String
   email    String  @unique
-  password String? 
-  
-  createdAt DateTime @default(now())
+  password String?
+
+  createdAt DateTime  @default(now())
   deletedAt DateTime?
+}
+
+model Ad {
+  id                 Int       @id @default(autoincrement())
+  userId             Int?
+  categoryId         Int
+  slug               String
+  price              Int?
+  currencyId         Int?      @default(1)
+  countryId          Int?
+  cityId             Int?
+  viewsCount         Int       @default(0)
+  likesCount         Int       @default(0)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime?
+  deletedAt          DateTime?
+  renewedAt          DateTime?
+  expiresAt          DateTime?
+  contactName        String?
+  contactPhoneNumber String?
+  contactEmail       String?
+  description        String?   @db.Text
+
+  Media Media[]
+  Like  Like[]
+  Phone Phone[]
+}
+
+model Media {
+  id   Int     @id @default(autoincrement())
+  adId Int
+  url  String // Adjust length as necessary
+  type String? // e.g., 'image', 'video', etc.
+  // adId   Ad?     @relation(fields: [adId], references: [id])
+  Ad   Ad      @relation(fields: [adId], references: [id])
+
+  @@index([adId]) // Optional: adds an index on adId for faster lookups
+}
+
+
+model Category {
+  id        Int     @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+  // Ad Ad[]
+}
+
+
+model Country {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  code      String? // Optional: ISO country code
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+  
+  City City[]
+}
+
+model City {
+  id        Int     @id @default(autoincrement())
+  name      String
+  countryId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+  
+  Country Country @relation(fields: [countryId], references: [id])
+  Ad Ad[]
+}
+
+
+
+model Brand {
+  id    Int     @id @default(autoincrement())
+  name  String
+  image String?
+
+  adCount   Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+  deletedAt DateTime?
+}
+
+model BrandModel {
+  id       Int     @id @default(autoincrement())
+  brandId  Int
+  name     String
+
+
+  @@index([brandId]) // Optional: adds an index on brandId for faster lookups
+}
+
+model Like {
+  id     Int @id @default(autoincrement())
+  adId   Int
+  userId Int // Assuming you want to track who liked the ad
+  Ad     Ad  @relation(fields: [adId], references: [id])
+
+  @@index([adId]) // Optional: adds an index on adId for faster lookups
+}
+
+model Phone {
+  id               Int       @id @default(autoincrement())
+  adId             Int? // Nullable
+  brandId          Int? // Nullable
+  brandName        String? // Nullable
+  modelId          Int? // Nullable
+  modelName        String // Non-nullable
+  year             Int? // Nullable
+  colorId          Int? // Nullable
+  description      String? // Nullable
+  isWhatsappActive Int? // Nullable (could be Boolean if you want)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime? // Nullable
+  deletedAt        DateTime? // Nullable
+  hasWarranty      DateTime?
+  barter           DateTime?
+
+  repairedDetials DateTime? // Nullable
+
+  hasBox     Boolean
+  hasCharger Boolean
+  hasCase    Boolean
+
+  ramGB       Boolean
+  storageGB   Int
+  batteryLife Int?
+
+  // Relationships
+  ad Ad? @relation(fields: [adId], references: [id])
+
+  @@map("Auto") // Map the model to the table name
+}
+
+
+model Transaction {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  adId      Int
+  amount    Float
+  createdAt DateTime @default(now())
+  
+  User User @relation(fields: [userId], references: [id])
+  Ad Ad @relation(fields: [adId], references: [id])
+}
+
+model Report {
+  id        Int     @id @default(autoincrement())
+  adId      Int
+  userId    Int
+  reason    String  // Reason for the report
+  createdAt DateTime @default(now())
+
+  Ad Ad @relation(fields: [adId], references: [id])
+  User User @relation(fields: [userId], references: [id])
+}
+
+
+model Notification {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  type      String  // e.g., 'like', 'comment', 'new_ad'
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  
+  User User @relation(fields: [userId], references: [id])
+}
+
+
+model Admin {
+  id        Int     @id @default(autoincrement())
+  userId    Int     @unique
+  role      String   // e.g., 'super_admin', 'moderator'
+  createdAt DateTime @default(now())
+  
+  User User @relation(fields: [userId], references: [id])
+}
+
+model Feedback {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  adId      Int
+  rating    Int     // e.g., 1-5 scale
+  comment   String?
+  createdAt DateTime @default(now())
+  
+  User User @relation(fields: [userId], references: [id])
+  Ad Ad @relation(fields: [adId], references: [id])
+}
+
+
+model LoginActivity {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  ip       String
+  userAgent String
+  createdAt DateTime @default(now())
+  
+  User User @relation(fields: [userId], references: [id])
+}
+
+model ActivityLog {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  activity  String  // e.g., 'login' 'viewed_ad', 'liked_ad'
+  adId      Int?
+  createdAt DateTime @default(now())
+  
+  User User @relation(fields: [userId], references: [id])
+  Ad Ad? @relation(fields: [adId], references: [id])
 }

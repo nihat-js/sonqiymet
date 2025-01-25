@@ -1,7 +1,6 @@
 "use client"
 
 import styled from "styled-components"
-import Layout from "../components/Layout"
 import Link from "next/link"
 import { Trash2, Edit } from "lucide-react"
 

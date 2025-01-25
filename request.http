@@ -16,3 +16,38 @@ Content-Type: application/json
     "email": "nihat@sonqiymet.com",
     "password": "password"
 }
+
+
+### Post Request
+
+POST http://localhost:3000/api/new/phone
+Authorization: Bearer <access_token>
+Content-Type: application/json
+
+{
+    "brandId" : 1,
+    "brandName" : "Apple",
+    "modelId" : 2,
+    "modelName" : "iPhone 12 mini",
+    "price" : 500 ,
+    "currency" : "AZN",
+    "description" : "Az islenib, tezedir",
+
+    "phoneNumber" : "+9450123221",
+    "isWhatsappActive" : true,
+
+
+    "hasBox" : true,
+    "hasCharger" : true,
+    "hasCase" : true,
+
+    "batteryLife" : 90,
+
+    "ramGB" : "4",
+    "storageGB" : "64",
+
+    "images": [
+        "image1.jpg",
+        "image2.jpg"
+    ],
+}

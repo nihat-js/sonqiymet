@@ -25,7 +25,6 @@ function generateObfuscatedFolderName(adId) {
     const folderName = (d.getFullYear() % 100) + ((d.getMonth() + 1).toString().padStart(2, '0')) + d.getDate().toString().padStart(2, '0') +
         + d.getHours().toString().padStart(2, '0') + hash.substring(0, 7);
     return folderName;
-
 }
 
 
@@ -42,41 +41,20 @@ export async function POST(req) {
     let result = await safeParse(data, {
         brandId: ["required", "integer"],
         modelId: ["required", "integer"],
-        bodyStyleId: ["required", "integer", { in: autoBodyStyles.map(item => item.id) }],
-        year: ["required", "integer", { min: 1900 }, { max: new Date().getFullYear() }],
 
-        mileage: ["required", "integer", { min: 0 }, { max: 99999999 }],
-        mileageUnitId: ["required", "integer", { in: mileageUnits.map(item => item.id) }],
-        colorId: ["required", "integer", { in: colors.map(item => item.id) }],
-        price: ["required", "integer", { min: 0 }, { max: 10000000 }],
-        currencyId: ["required", "integer", { in: currencies.map(item => item.id) }],
-
-        fuelTypeId: ["required", "integer", { in: fuelTypes.map(item => item.id) }],
-        wheelDriveTypeId: ["required", "integer", { in: wheelDriveTypes.map(item => item.id) }],
-        transmissionTypeId: ["required", "integer", { in: transmissionTypes.map(item => item.id) }],
-        engineSize: ["required", "integer", { min: 0 }, { max: 15000 }],
-        horsePower: ["required", "integer", { min: 0 }, { max: 10000 }],
-
-        seatsCount: ["required", "integer", { min: 0 }, { max: 15 }],
-        cylindersCount: ["required", "integer", { min: 0 }, { max: 64 }],
-        VIN: ["optional", "string", "max:255"],
-
-        // features : ["optional", "array"],
         images: ["required", "array"],
 
         barter: ["required", "integer", { in: [0, 1] }],
-        hasCasco: ["required", "integer", { in: [0, 1] }],
-
+        hasWarranty: ["required", "integer", { in: [0, 1] }],
         description: ["optional", "string"],
-
-        // isAccidentFree : ["required","integer", {in : [0,1]}],
 
 
         cityId: ["required", "integer", "exists:City,id"],
-        contactName: ["required", "string", "max:255"],
-        contactEmail: ["required", "email"],
-        contactPhoneNumber: ["required", "number"],
+        phoneNumber: ["required", "number"],
         isWhatsappActive: ["required", "integer", { in: [0, 1] }],
+        hasBox: ["required", "integer", { in: [0, 1] }],
+        hasCharger: ["required", "integer", { in: [0, 1] }],
+        hasCase: ["required", "integer", { in: [0, 1] }],
     })
 
     if (result?.error) {
@@ -84,7 +62,7 @@ export async function POST(req) {
     }
 
 
-    let brand = await AutoBrand.findByPk(+data.brandId);
+    let brand = await prisma.findByPk(+data.brandId);
     if (!brand) return new Response("Brand not found", { status: 404 })
 
     let model = await AutoModel.findOne({
