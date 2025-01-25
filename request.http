@@ -1,0 +1,18 @@
+#### Registration Request
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "name": "Nihat",
+    "email": "nihat@sonqiymet.com",
+    "password": "password"
+}
+
+### Login Request
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "nihat@sonqiymet.com",
+    "password": "password"
+}

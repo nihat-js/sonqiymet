@@ -186,8 +186,8 @@ export default function Navbar() {
 
           <AccountContainer>
             <NavLinks>
+              <NavLink href="/sat"> <PlusCircleIcon className="h-5 w-5" /> </NavLink>
               <NavLink href="/faq">FAQ</NavLink>
-              <NavLink href="/sell"> <PlusCircleIcon className="h-5 w-5" /> </NavLink>
               <NavLink href="/favorites">Sevimlilər</NavLink>
               <div 
                 className='relative flex items-center gap-2 cursor-pointer bg-mandarin hover:bg-mandarin2 transition-all duration-500 transform hover:scale-110 rounded-xl px-2 py-2 shadow-md hover:shadow-xl'
@@ -211,7 +211,7 @@ export default function Navbar() {
             <div className="sm:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
                 <NavLink href="/buy">Al</NavLink>
-                <NavLink href="/sell">Sat</NavLink>
+                <NavLink href="/sat">Sat</NavLink>
                 <NavLink href="/favorites">Sevimlilər</NavLink>
               </div>
             </div>
