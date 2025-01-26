@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/user/Navbar";
 import Footer from "@/components/user/Footer";
 import { Providers } from "@/providers/providers";
+import useGlobalStore from "@/stores/globalStore";
+import StoreProvider from "@/providers/StoreProvider";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -20,28 +22,26 @@ export const metadata: Metadata = {
   description: "Son Qiymət - Aktiv Telefon satışı platforması",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children, }) {
+
+  const user = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    avatar: "https://example.com/avatar.jpg",
+  }
+
   return (
     <html lang="en">
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet"></link>
       </head>
-      <Providers>
-        <body className="relative" style={{ 
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-          // background : "black"
-          backgroundColor : "#f3f4f5"
-        }}>
-          <div className="absolute inset-0" style={{
-            // backgroundColor: '#F8F4F2',
-            opacity: 0.1,
-            // backgroundImage: 'repeating-radial-gradient(circle at 0 0, transparent 0, #e5e5f7 23px), repeating-linear-gradient(#EF790055, #EF7900)',
-            // zIndex: -1,
-          }}></div>
+      <body className="relative" style={{
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+        // background : "black"
+        backgroundColor: "#f3f4f5"
+      }}>
+        <StoreProvider user={user}>
+
           <div className="max-w-[1000px] mx-auto">
             <Navbar />
             {/* <CategoryNavbar /> */}
@@ -50,8 +50,8 @@ export default function RootLayout({
             </main>
             <Footer />
           </div>
-        </body>
-      </Providers>
+        </StoreProvider>
+      </body>
     </html>
   );
 }

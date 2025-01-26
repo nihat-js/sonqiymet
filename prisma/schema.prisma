@@ -18,6 +18,16 @@ model User {
   name     String
   email    String  @unique
   password String?
+  provider String?
+
+  // Add reverse relations
+  transactions   Transaction[]
+  reports        Report[]
+  notifications  Notification[]
+  admin          Admin?
+  feedback       Feedback[]
+  loginActivity  LoginActivity[]
+  activityLog    ActivityLog[]
 
   createdAt DateTime  @default(now())
   deletedAt DateTime?
@@ -47,6 +57,11 @@ model Ad {
   Media Media[]
   Like  Like[]
   Phone Phone[]
+  // Add reverse relations
+  transactions  Transaction[]
+  reports       Report[]
+  feedback      Feedback[]
+  activityLogs  ActivityLog[]
 }
 
 model Media {

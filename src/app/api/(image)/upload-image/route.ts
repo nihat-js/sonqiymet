@@ -29,15 +29,15 @@ export async function POST(req) {
   const targetPath = path.join(uploadDir, randomFilename);
 
   const buffer = await imageFile.arrayBuffer();
-  const watermarkText = 'AVTOBEH.COM';
+  const watermarkText = 'SONQIYMET.COM';
   const transparency = 0.15;
 
-  const { width, height } = await sharp(buffer).metadata();
+  const { width, height }  = await sharp(buffer).metadata();
 
   const svgWatermark = `
   <svg width="${width}" height="${height}">
     <style>
-      .heavy { font: bold ${Math.min(width / 10, 60)}px sans-serif; fill: white; }
+      .heavy { font: bold ${Math.min(width || 0 / 10, 60)}px sans-serif; fill: white; }
       .light { opacity: ${transparency}; }
     </style>
     <text x="50%" y="50%" class="heavy light" text-anchor="middle" dominant-baseline="middle">

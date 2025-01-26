@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Phone, Search, ShoppingCart, Menu, X, User, PlusCircleIcon, LogInIcon, Smartphone } from 'lucide-react';
+import { Phone, Search, ShoppingCart, Menu, X, User, PlusCircleIcon, LogInIcon, Smartphone, Settings, LogOut } from 'lucide-react';
 import styled from 'styled-components';
 import AuthModal from '../auth/AuthModal';
+import useAuthStore from '@/stores/authStore';
 
 // Styled components
 const Nav = styled.nav`
@@ -108,14 +109,95 @@ const AccountContainer = styled.div`
   position: relative;
 `;
 
-const AccountMenu = styled.div`
+const UserMenuContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgba(255, 126, 0, 0.1);
+  }
+`;
+
+const UserDropdown = styled.div`
   position: absolute;
+  top: 100%;
   right: 0;
+  margin-top: 0.5rem;
   background: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  border-radius: 5px;
-  display: ${props => (props.isOpen ? 'block' : 'none')}; // Control visibility based on prop
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s;
+  z-index: 30;
+
+  ${UserMenuContainer}:hover & {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+`;
+
+const DropdownItem = styled.div`
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--obsidian);
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgba(255, 126, 0, 0.1);
+    color: var(--mandarin);
+  }
+
+  &:first-child {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+
+  &:last-child {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+`;
+
+const UserAvatar = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--mandarin);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+`;
+
+const UserName = styled.span`
+  font-weight: 500;
+  color: var(--obsidian);
+`;
+
+const UserEmail = styled.span`
+  font-size: 0.75rem;
+  color: #666;
 `;
 
 const LogoText = styled.span`
@@ -156,14 +238,25 @@ const LogoText = styled.span`
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('login');
+  const { user, logout } = useAuthStore();
 
   const handleAuthClick = (mode: 'login' | 'register') => {
     setAuthModalMode(mode);
     setIsAuthModalOpen(true);
-    setIsAccountMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(word => word[0])
+      .join('')
+      .slice(0, 2);
   };
 
   return (
@@ -189,15 +282,47 @@ export default function Navbar() {
               <NavLink href="/sat"> <PlusCircleIcon className="h-5 w-5" /> </NavLink>
               <NavLink href="/faq">FAQ</NavLink>
               <NavLink href="/favorites">Sevimlilər</NavLink>
-              <div 
-                className='relative flex items-center gap-2 cursor-pointer bg-mandarin hover:bg-mandarin2 transition-all duration-500 transform hover:scale-110 rounded-xl px-2 py-2 shadow-md hover:shadow-xl'
-                onClick={() => handleAuthClick('login')}
-              >
-                <LogInIcon className="h-6 w-6 text-white" />
-                <span className="transition-all duration-500 text-white">Daxil ol</span>
-                <div className='absolute inset-0 bg-gradient-to-r from-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-xl'></div>
-                <div className='absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full animate-ping'></div>
-              </div>
+              
+              {user ? (
+                <UserMenuContainer>
+                  <UserAvatar>
+                    {user.name ? getInitials(user.name) : <User className="h-5 w-5" />}
+                  </UserAvatar>
+                  <UserInfo>
+                    <UserName>{user.name || 'İstifadəçi'}</UserName>
+                    {user.email && <UserEmail>{user.email}</UserEmail>}
+                  </UserInfo>
+                  
+                  <UserDropdown>
+                    <DropdownItem as={Link} href="/profile">
+                      <User className="h-4 w-4" />
+                      Mənim Profilim
+                    </DropdownItem>
+                    <DropdownItem as={Link} href="/my-posts">
+                      <PlusCircleIcon className="h-4 w-4" />
+                      Mənim Elanlarım
+                    </DropdownItem>
+                    <DropdownItem as={Link} href="/settings">
+                      <Settings className="h-4 w-4" />
+                      Tənzimləmələr
+                    </DropdownItem>
+                    <DropdownItem onClick={handleLogout}>
+                      <LogOut className="h-4 w-4" />
+                      Çıxış
+                    </DropdownItem>
+                  </UserDropdown>
+                </UserMenuContainer>
+              ) : (
+                <div 
+                  className='relative flex items-center gap-2 cursor-pointer bg-mandarin hover:bg-mandarin2 transition-all duration-500 transform hover:scale-110 rounded-xl px-2 py-2 shadow-md hover:shadow-xl'
+                  onClick={() => handleAuthClick('login')}
+                >
+                  <LogInIcon className="h-6 w-6 text-white" />
+                  <span className="transition-all duration-500 text-white">Daxil ol</span>
+                  <div className='absolute inset-0 bg-gradient-to-r from-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 rounded-xl'></div>
+                  <div className='absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full animate-ping'></div>
+                </div>
+              )}
             </NavLinks>
           </AccountContainer>
 

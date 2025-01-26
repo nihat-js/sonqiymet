@@ -64,8 +64,8 @@ export async function POST(request : NextRequest) {
     message: "Daxil olundu",
     data: {
       id: user.id,
-      email: user.email,
       name: user.name,
+      email: user.email,
     }
   })
   // return NextResponse.json(

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { X, Mail, Lock, ArrowRight, Github, User } from 'lucide-react';
 import Image from 'next/image';
 import styled from 'styled-components';
+import useAuthStore from '@/stores/authStore';
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -39,7 +40,7 @@ const ModalContent = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  padding: 0.75rem;
+  padding: .6rem 37px;
   border: 1px solid #e2e8f0;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
@@ -84,8 +85,49 @@ interface AuthModalProps {
 export default function AuthModal({ isOpen, onClose, initialMode = 'login' }: AuthModalProps) {
   const [mode, setMode] = useState<'login' | 'register' | 'forgot-password'>(initialMode);
   const [emailSent, setEmailSent] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
 
-  if (!isOpen) return null;
+  const { login, register } = useAuthStore();
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+    setError(null);
+  };
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError(null);
+
+    if (mode === 'login') {
+      const result = await login(form.email, form.password);
+      if (!result.error) {
+        onClose();
+      } else {
+        setError(result.message);
+      }
+    } else if (mode === 'register') {
+      if (form.password !== form.confirmPassword) {
+        setError("Şifrələr uyğun gəlmir");
+        return;
+      }
+      const result = await register(form.name, form.email, form.password);
+      if (!result.error) {
+        onClose();
+      } else {
+        setError(result.message);
+      }
+    }
+  }
 
   const handleGoogleLogin = () => {
     // Implement Google login logic here
@@ -129,6 +171,10 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login' }: Au
     );
   }
 
+  if (!isOpen){
+    return <div></div>
+  }
+
   return (
     <ModalOverlay onClick={onClose}>
       <ModalContent onClick={e => e.stopPropagation()}>
@@ -152,13 +198,22 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login' }: Au
           </p>
         </div>
 
-        <form className="space-y-4" onSubmit={mode === 'forgot-password' ? handleForgotPassword : undefined}>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          {error && (
+            <div className="text-red-500 text-sm text-center mb-4">
+              {error}
+            </div>
+          )}
+
           {mode === 'register' && (
             <div>
               <div className="relative">
                 <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                 <Input
                   type="text"
+                  name="name"
+                  value={form.name}
+                  onChange={handleInputChange}
                   placeholder="Ad və Soyad"
                   className="pl-10"
                 />
@@ -171,6 +226,9 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login' }: Au
               <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
               <Input
                 type="email"
+                name="email"
+                value={form.email}
+                onChange={handleInputChange}
                 placeholder="E-poçt"
                 className="pl-10"
               />
@@ -178,16 +236,37 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login' }: Au
           </div>
 
           {mode !== 'forgot-password' && (
-            <div>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <Input
-                  type="password"
-                  placeholder="Şifrəniz"
-                  className="pl-10"
-                />
+            <>
+              <div>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                  <Input
+                    type="password"
+                    name="password"
+                    value={form.password}
+                    onChange={handleInputChange}
+                    placeholder="Şifrəniz"
+                    className="pl-10"
+                  />
+                </div>
               </div>
-            </div>
+              
+              {mode === 'register' && (
+                <div>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+                    <Input
+                      type="password"
+                      name="confirmPassword"
+                      value={form.confirmPassword}
+                      onChange={handleInputChange}
+                      placeholder="Şifrəni təsdiqləyin"
+                      className="pl-10"
+                    />
+                  </div>
+                </div>
+              )}
+            </>
           )}
 
           <Button className="primary">
